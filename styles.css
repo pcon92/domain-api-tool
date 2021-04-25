@@ -1,0 +1,46 @@
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* General format rules */
+
+
+
+
+/* Main */
+
+#result-area {
+    border: 1px solid black;
+    height: 200px;
+    width: 200px;
+}
+    
+
+#description-div {
+    height: 300px;
+    width: 300px;
+    overflow: auto;
+}
+
+/* Footer */
+
+
+footer {
+    font-size: 10px; 
+    position: fixed;
+    bottom: 0px;
+    height: 30px;
+    width: 100%;
+    line-height: 30px;
+    padding-left: 10px;
+}
+
+
+/* 
+
+
+*/
+
