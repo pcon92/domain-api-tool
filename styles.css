@@ -7,22 +7,51 @@
 
 /* General format rules */
 
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
+.dir-column {
+    flex-direction: column;
+}
 
 
 /* Main */
 
-#result-area {
+#outer-container {
+    height: 100vh;
+    width: 100%;
     border: 1px solid black;
-    height: 200px;
-    width: 200px;
 }
-    
 
-#description-div {
+#top-area {
+    height: 30vh;
+    border: 1px solid black;
+    width: 100%;
+    justify-content: space-around;
+}
+
+#bottom-area {
+    border: 1px dashed black;
+    height: 70vh;
+    overflow: auto;
+    width: 100%;
+    align-items: flex-start;
+}
+
+.property-tile {
+    margin: 20px;
+    border: 1px solid black;
+} 
+
+.description-div {
     height: 300px;
     width: 300px;
     overflow: auto;
+    margin: 10px;
+    border: 1px dotted black;
 }
 
 /* Footer */

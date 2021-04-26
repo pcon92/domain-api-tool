@@ -18,112 +18,131 @@
 
     <body>
 
-        <div id="outer-container">
-            <input type="text">
-            <button value='Get Property From ID' onclick=get_property_from_id()>Get Property From ID</button>
-            <button value="Search for Property" onclick=get_property_info()>Search For Property</button>
-            <div id="property-tile-div">
-                <div id="property-image"></div>
-                <div id="property-address"></div>
-                <div id="property-icons-area">
-                    <div id="property-bedrooms"></div>
-                    <div id="property-bathrooms"></div>
-                    <div id="property-car-spaces"></div>
+        <div id="outer-container" class="flex-center dir-column">
+
+            <div id="top-area" class="flex-center dir-column">
+                <h1>Domain API Tool</h1>
+                <div id="get-property-from-id-div">
+                    <input type="text">
+                    <button value='Get Property From ID' onclick=get_property_from_id()>Get Property From ID</button>
                 </div>
-                <div id="price"></div>
-                <br>
-                <div id="description-div"></div>
+                
+                <form id="search-parameter-form">
+                    <div class="select-div">
+                        <label for="bedrooms-min" id="bedrooms-min-select-label">Bedrooms (Min.)</label>
+                        <select id="bedrooms-min-select" name="bedrooms-min">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10+">10+</option>
+                        </select>
+                        <label for="bedrooms-max" id="bedrooms-max-select-label">Bedrooms (Max.)</label>
+                        <select id="bedrooms-max-select" name="bedrooms-max">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10+">10+</option>
+                        </select>
+                    </div>
+                    <div class="select-div">
+                        <label for="bathrooms-min" id="bathrooms-min-select-label">Bathrooms (Min.)</label>
+                        <select id="bathrooms-min-select" name="bathrooms-min">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10+">10+</option>
+                        </select>
+                        <label for="bathrooms-max" id="bathrooms-max-select-label">Bathrooms (Max.)</label>
+                        <select id="bathrooms-max-select" name="bathrooms-max">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10+">10+</option>
+                        </select>
+                    </div>
+
+                    <div class="select-div">
+                        <label for="carspaces-min" id="carspaces-min-select-label">Car Spaces (Min.)</label>
+                        <select id="carspaces-min-select" name="carspaces-min">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10+">10+</option>
+                        </select>
+                        <label for="carspaces-max" id="carspaces-max-select-label">Car Spaces (Max.)</label>
+                        <select id="carspaces-max-select" name="carspaces-max">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10+">10+</option>
+                        </select>
+                    </div>
+
+                    <div class="select-div">
+                        <label for="number-of-properties" id="number-of-properties-select-label">Number of properties to display</label>
+                        <select id="number-of-properties-select" name="number-of-properties">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10+">10+</option>
+                        </select>
+                    </div>
+
+                    <input type="submit" value="Search For Properties" id="submit-btn" name="submit-btn">
+
+                </form>
             </div>
 
-
-            <form id="search-parameter-form">
-                <div class="select-div">
-                    <label for="bedrooms-min" id="bedrooms-min-select-label">Bedrooms (Min.)</label>
-                    <select id="bedrooms-min-select" name="bedrooms-min">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10+">10+</option>
-                    </select>
-                    <label for="bedrooms-max" id="bedrooms-max-select-label">Bedrooms (Max.)</label>
-                    <select id="bedrooms-max-select" name="bedrooms-max">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10+">10+</option>
-                    </select>
-                </div>
-                <div class="select-div">
-                    <label for="bathrooms-min" id="bathrooms-min-select-label">Bathrooms (Min.)</label>
-                    <select id="bathrooms-min-select" name="bathrooms-min">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10+">10+</option>
-                    </select>
-                    <label for="bathrooms-max" id="bathrooms-max-select-label">Bathrooms (Max.)</label>
-                    <select id="bathrooms-max-select" name="bathrooms-max">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10+">10+</option>
-                    </select>
+                <div id="bottom-area" class="flex-center">
+                    <div id="property-tile-div"></div>
                 </div>
 
-                <div class="select-div">
-                    <label for="carspaces-min" id="carspaces-min-select-label">Car Spaces (Min.)</label>
-                    <select id="carspaces-min-select" name="carspaces-min">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10+">10+</option>
-                    </select>
-                    <label for="carspaces-max" id="carspaces-max-select-label">Car Spaces (Max.)</label>
-                    <select id="carspaces-max-select" name="carspaces-max">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10+">10+</option>
-                    </select>
-                </div>
-            </form>
 
+
+
+            </div>
         </div>
 
     </body>
