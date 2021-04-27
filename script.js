@@ -6,15 +6,15 @@ const BATHROOMS_MAX = document.getElementById("bathrooms-max-select");
 const CARSPACES_MIN = document.getElementById("carspaces-min-select");
 const CARSPACES_MAX = document.getElementById("carspaces-max-select");
 const NUMBER_OF_PROPERTIES = document.getElementById("number-of-properties-select");
+const BOTTOM_AREA = document.getElementById("bottom-area");
+const LOADING_OVERLAY = document.getElementById("loading-overlay");
 
 let id_array = [];
-const auth_url = 'https://api.domain.com.au/v1/listings/residential/_search'; 
 
 
-document.addEventListener("submit", e => {
+document.getElementById("search-btn").addEventListener("click", e => {
 
     e.preventDefault(); 
-
     const  formValueArray = {
         "minBedrooms" : BEDROOMS_MIN.value,
         "maxBedrooms" : BEDROOMS_MAX.value,
@@ -25,35 +25,61 @@ document.addEventListener("submit", e => {
         "pageSize" : NUMBER_OF_PROPERTIES.value,
         "pageNumber" : Math.floor(Math.random() * 10)
     }
-    
-    get_property_info(formValueArray);
+    remove_property_tiles();
+    display_loading();
+    setTimeout(get_property_info, 1000, formValueArray);
 
 });
 
+
+document.getElementById("get-property-from-id-btn").addEventListener("click", e => {
+    display_loading();
+    setTimeout(get_property_from_id, 1000);
+});
+
+
+function remove_property_tiles() {
+
+    const allTiles = document.querySelectorAll(".property-tile");
+    allTiles.forEach(tile => tile.style.display = "none");
+}
+
+
 async function get_property_from_id() {
 
+    remove_property_tiles();
     const property_id = '2016886197';
     const id_url = `https://api.domain.com.au/v1/listings/${property_id}`
-
     const result = await fetch(id_url, {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
             'X-Api-Key' : API_KEY
         }
-    })
-
+    }).then(hide_loading())
     id_array = [];
     id_array.push(property_id);
-    get_property_from_id_array(id_array);
+    get_property_from_id_array(id_array)
 
 }
 
 
-async function get_property_info(formValueArray) {
-    
-    id_array = [];
+function display_loading() { 
+    LOADING_OVERLAY.style.display = "block";
+}
 
+
+function hide_loading() { 
+    LOADING_OVERLAY.style.display = "none";
+}
+
+
+async function get_property_info(formValueArray) {
+
+    display_loading();
+
+    id_array = [];
+    const auth_url = 'https://api.domain.com.au/v1/listings/residential/_search'; 
     const data = await fetch(auth_url, {
         method: 'POST',
         headers: {
@@ -62,10 +88,8 @@ async function get_property_info(formValueArray) {
         'X-Api-Key' : API_KEY
         },
         body: JSON.stringify(formValueArray)
-    });
-
+    }).then(hide_loading());
     const data_json = await data.json();
-
     for (el in data_json) {
         if (data_json[el].type === "Project") {
             id_array.push(data_json[el].listings[0].id.toString())
@@ -74,7 +98,6 @@ async function get_property_info(formValueArray) {
         }
 
     }
-
     get_property_from_id_array(id_array);
 
 }
@@ -83,9 +106,7 @@ async function get_property_info(formValueArray) {
 async function get_property_from_id_array(id_array) {
 
     for (id in id_array) {
-
         const id_url = `https://api.domain.com.au/v1/listings/${id_array[id]}`
-
         const result = await fetch(id_url, {
             method: 'GET',
             headers: {
@@ -93,39 +114,52 @@ async function get_property_from_id_array(id_array) {
                 'X-Api-Key' : API_KEY
             }
         })
-
-
         const result_json = await result.json();
 
         const newPropTileDiv = document.createElement("div");
         newPropTileDiv.setAttribute("id", `${id}`);
         newPropTileDiv.setAttribute("class", "property-tile");
-        PROPERTY_TILE.appendChild(newPropTileDiv);
+        newPropTileDiv.style.display = "flex";
+        newPropTileDiv.style.flexDirection = "column";
+        newPropTileDiv.style.justifyContent = "center";
+        newPropTileDiv.style.alignItems = "center";
+        BOTTOM_AREA.appendChild(newPropTileDiv);
         
         const propImageDiv = document.createElement("img");
         propImageDiv.setAttribute("src", `${result_json.media[0].url}`);
-        propImageDiv.setAttribute("height", "100");
-        propImageDiv.setAttribute("width", "100");
+        propImageDiv.setAttribute("height", "300");
+        propImageDiv.setAttribute("width", "300");
         propImageDiv.setAttribute("alt", "property-image");
+        propImageDiv.setAttribute("class", "image");
+        propImageDiv.style.border = "1px solid black";
         newPropTileDiv.appendChild(propImageDiv);
 
         const newPropTileDivAddress = document.createElement("div");
+        newPropTileDivAddress.setAttribute("class", "address");
         newPropTileDivAddress.innerText = result_json.addressParts.displayAddress;
         newPropTileDiv.appendChild(newPropTileDivAddress);
 
+        const newPropTileDivBedBathCar = document.createElement("div");
+        newPropTileDivBedBathCar.setAttribute("class", "bedbathcar-div");
+        newPropTileDiv.appendChild(newPropTileDivBedBathCar);
+
         const newPropTileDivBedrooms = document.createElement("div");
-        newPropTileDivBedrooms.innerText = `Bedrooms: ${result_json.bedrooms}`;
-        newPropTileDiv.appendChild(newPropTileDivBedrooms);
+        newPropTileDivBedrooms.setAttribute("class", "bedbathcar");
+        newPropTileDivBedrooms.innerHTML =  `${result_json.bedrooms} <i class="fas fa-bed"></i>`
+        newPropTileDivBedBathCar.appendChild(newPropTileDivBedrooms);
 
         const newPropTileDivBathrooms = document.createElement("div");
-        newPropTileDivBathrooms.innerText = `Bathrooms: ${result_json.bathrooms}`;
-        newPropTileDiv.appendChild(newPropTileDivBathrooms);
+        newPropTileDivBathrooms.setAttribute("class", "bedbathcar");
+        newPropTileDivBathrooms.innerHTML = `${result_json.bathrooms} <i class="fas fa-bath"></i>`;
+        newPropTileDivBedBathCar.appendChild(newPropTileDivBathrooms);
 
         const newPropTileDivCarspaces = document.createElement("div");
-        newPropTileDivCarspaces.innerText = `Car Spaces: ${result_json.carspaces}`;
-        newPropTileDiv.appendChild(newPropTileDivCarspaces);
+        newPropTileDivCarspaces.setAttribute("class", "bedbathcar");
+        newPropTileDivCarspaces.innerHTML = `${result_json.carspaces} <i class="fas fa-car"></i>`;
+        newPropTileDivBedBathCar.appendChild(newPropTileDivCarspaces);
 
         const newPropTileDivPrice = document.createElement("div");
+        newPropTileDivPrice.setAttribute("class", "price");
         newPropTileDivPrice.innerText = `Price: ${result_json.priceDetails.displayPrice}`;
         newPropTileDiv.appendChild(newPropTileDivPrice);
 
@@ -135,7 +169,6 @@ async function get_property_from_id_array(id_array) {
         newPropTileDiv.appendChild(newPropTileDivDescription);
 
     }   
-
 }
 
 

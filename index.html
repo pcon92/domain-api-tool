@@ -18,19 +18,23 @@
 
     <body>
 
-        <div id="outer-container" class="flex-center dir-column">
+        <div id="loading-overlay"></div>
+
+        <div id="outer-container" >
 
             <div id="top-area" class="flex-center dir-column">
                 <h1>Domain API Tool</h1>
+                <h6>Search for properties using property data from Domain Group</h6>
                 <div id="get-property-from-id-div">
                     <input type="text">
-                    <button value='Get Property From ID' onclick=get_property_from_id()>Get Property From ID</button>
+                    <button value='Get Property From ID' id="get-property-from-id-btn" >Get Property From ID</button>
                 </div>
                 
                 <form id="search-parameter-form">
                     <div class="select-div">
-                        <label for="bedrooms-min" id="bedrooms-min-select-label">Bedrooms (Min.)</label>
-                        <select id="bedrooms-min-select" name="bedrooms-min">
+                        <label for="bedrooms-min" id="bedrooms-min-select-label" class="select-label">Bedrooms (Min.)</label>
+                        <select id="bedrooms-min-select" name="bedrooms-min" class="select-box">
+                            <option value="0" selected>Any</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -40,25 +44,12 @@
                             <option value="7">7</option>
                             <option value="8">8</option>
                             <option value="9">9</option>
-                            <option value="10+">10+</option>
-                        </select>
-                        <label for="bedrooms-max" id="bedrooms-max-select-label">Bedrooms (Max.)</label>
-                        <select id="bedrooms-max-select" name="bedrooms-max">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10+">10+</option>
+                            <option value="100">10+</option>
                         </select>
                     </div>
                     <div class="select-div">
-                        <label for="bathrooms-min" id="bathrooms-min-select-label">Bathrooms (Min.)</label>
-                        <select id="bathrooms-min-select" name="bathrooms-min">
+                        <label for="bedrooms-max" id="bedrooms-max-select-label" class="select-label">Bedrooms (Max.)</label>
+                        <select id="bedrooms-max-select" name="bedrooms-max" class="select-box">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -68,10 +59,14 @@
                             <option value="7">7</option>
                             <option value="8">8</option>
                             <option value="9">9</option>
-                            <option value="10+">10+</option>
+                            <option value="100">10+</option>
+                            <option value="1000" selected>Any</option>
                         </select>
-                        <label for="bathrooms-max" id="bathrooms-max-select-label">Bathrooms (Max.)</label>
-                        <select id="bathrooms-max-select" name="bathrooms-max">
+                    </div>
+                    <div class="select-div">
+                        <label for="bathrooms-min" id="bathrooms-min-select-label" class="select-label">Bathrooms (Min.)</label>
+                        <select id="bathrooms-min-select" name="bathrooms-min" class="select-box">
+                            <option value="0" selected>Any</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -81,13 +76,30 @@
                             <option value="7">7</option>
                             <option value="8">8</option>
                             <option value="9">9</option>
-                            <option value="10+">10+</option>
+                            <option value="100">10+</option>
+                        </select>
+                    </div>
+                    <div class="select-div">
+                        <label for="bathrooms-max" id="bathrooms-max-select-label" class="select-label">Bathrooms (Max.)</label>
+                        <select id="bathrooms-max-select" name="bathrooms-max" class="select-box">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="100">10+</option>
+                            <option value="1000" selected>Any</option>
                         </select>
                     </div>
 
                     <div class="select-div">
-                        <label for="carspaces-min" id="carspaces-min-select-label">Car Spaces (Min.)</label>
-                        <select id="carspaces-min-select" name="carspaces-min">
+                        <label for="carspaces-min" id="carspaces-min-select-label" class="select-label">Car Spaces (Min.)</label>
+                        <select id="carspaces-min-select" name="carspaces-min" class="select-box">
+                            <option value="0" selected>Any</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -97,10 +109,12 @@
                             <option value="7">7</option>
                             <option value="8">8</option>
                             <option value="9">9</option>
-                            <option value="10+">10+</option>
+                            <option value="100">10+</option>
                         </select>
-                        <label for="carspaces-max" id="carspaces-max-select-label">Car Spaces (Max.)</label>
-                        <select id="carspaces-max-select" name="carspaces-max">
+                    </div>
+                    <div class="select-div">
+                        <label for="carspaces-max" id="carspaces-max-select-label" class="select-label">Car Spaces (Max.)</label>
+                        <select id="carspaces-max-select" name="carspaces-max" class="select-box">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -110,33 +124,37 @@
                             <option value="7">7</option>
                             <option value="8">8</option>
                             <option value="9">9</option>
-                            <option value="10+">10+</option>
+                            <option value="100">10+</option>
+                            <option value="1000" selected>Any</option>
                         </select>
                     </div>
 
                     <div class="select-div">
-                        <label for="number-of-properties" id="number-of-properties-select-label">Number of properties to display</label>
-                        <select id="number-of-properties-select" name="number-of-properties">
+                        <label for="number-of-properties" id="number-of-properties-select-label" class="select-label">Number of properties to display</label>
+                        <select id="number-of-properties-select" name="number-of-properties" class="select-box">
                             <option value="1">1</option>
                             <option value="2">2</option>
-                            <option value="3">3</option>
+                            <option value="3" selected>3</option>
                             <option value="4">4</option>
                             <option value="5">5</option>
                             <option value="6">6</option>
                             <option value="7">7</option>
                             <option value="8">8</option>
                             <option value="9">9</option>
-                            <option value="10+">10+</option>
+                            <option value="10">10</option>
                         </select>
                     </div>
 
-                    <input type="submit" value="Search For Properties" id="submit-btn" name="submit-btn">
+
 
                 </form>
+
+                <button value="Search For Properties" id="search-btn">Search For Properties</button>
+
             </div>
 
-                <div id="bottom-area" class="flex-center">
-                    <div id="property-tile-div"></div>
+                <div id="bottom-area">
+
                 </div>
 
 
