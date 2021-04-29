@@ -53,7 +53,6 @@ document.getElementById("get-property-from-id-btn").addEventListener("click", e 
     setTimeout(get_property_from_id, 1000);
 });
 
-
 function remove_property_tiles() {
 
     const allTiles = document.querySelectorAll(".property-tile");
@@ -141,14 +140,17 @@ async function get_property_from_id_array(id_array) {
         newPropTileDiv.style.alignItems = "center";
         BOTTOM_AREA.appendChild(newPropTileDiv);
         
+        const propImageDivWrapper = document.createElement("div");
         const propImageDiv = document.createElement("img");
+        propImageDivWrapper.setAttribute("class", "image-wrapper");
         propImageDiv.setAttribute("src", `${result_json.media[0].url}`);
         propImageDiv.setAttribute("height", "300");
         propImageDiv.setAttribute("width", "300");
         propImageDiv.setAttribute("alt", "property-image");
         propImageDiv.setAttribute("class", "image");
         propImageDiv.style.border = "1px solid black";
-        newPropTileDiv.appendChild(propImageDiv);
+        newPropTileDiv.appendChild(propImageDivWrapper);
+        propImageDivWrapper.appendChild(propImageDiv);
 
         const newPropTileDivAddress = document.createElement("div");
         newPropTileDivAddress.setAttribute("class", "address");
