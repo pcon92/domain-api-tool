@@ -8,11 +8,20 @@ const CARSPACES_MAX = document.getElementById("carspaces-max-select");
 const NUMBER_OF_PROPERTIES = document.getElementById("number-of-properties-select");
 const BOTTOM_AREA = document.getElementById("bottom-area");
 const LOADING_OVERLAY = document.getElementById("loading-overlay");
+const LOCATION_STATE = document.getElementById("location-state-select");
+const MIN_PRICE = document.getElementById("min-price-select");
+const MAX_PRICE = document.getElementById('max-price-select');
+const LISTING_TYPE = document.getElementById('listing-type-select');
+const PRICE_WITHHELD = document.getElementById('price-withheld-select');
+const PROPERTY_TYPE = document.getElementById('property-types-select');
+const POSTCODE = document.getElementById('location-postcode-select');
 
 let id_array = [];
 
 
 document.getElementById("search-btn").addEventListener("click", e => {
+
+    let randomPageNum = Math.floor(Math.random() * 10);
 
     e.preventDefault(); 
     const  formValueArray = {
@@ -23,8 +32,15 @@ document.getElementById("search-btn").addEventListener("click", e => {
         "minCarspaces": CARSPACES_MIN.value,
         "maxCarSpaces" : CARSPACES_MAX.value,
         "pageSize" : NUMBER_OF_PROPERTIES.value,
-        "pageNumber" : Math.floor(Math.random() * 10)
+        "pageNumber" : randomPageNum,
+        "locations" : [{ "state": `${LOCATION_STATE.value}`, "postcode" : `${POSTCODE.value}` }],
+        "minPrice" : MIN_PRICE.value,
+        "maxPrice" : MAX_PRICE.value,
+        "listingType" : LISTING_TYPE.value,
+        "excludePriceWithheld" : PRICE_WITHHELD.value,
+        "propertyTypes" : [PROPERTY_TYPE.value]
     }
+
     remove_property_tiles();
     display_loading();
     setTimeout(get_property_info, 1000, formValueArray);
