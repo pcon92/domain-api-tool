@@ -148,7 +148,6 @@ async function get_property_from_id_array(id_array) {
         propImageDiv.setAttribute("width", "300");
         propImageDiv.setAttribute("alt", "property-image");
         propImageDiv.setAttribute("class", "image");
-        propImageDiv.style.border = "1px solid black";
         newPropTileDiv.appendChild(propImageDivWrapper);
         propImageDivWrapper.appendChild(propImageDiv);
 

@@ -8,7 +8,10 @@
         <script src="https://kit.fontawesome.com/8853004b20.js" crossorigin="anonymous"></script>
         <!-- Use styles.css file -->
         <link rel="stylesheet" href="styles.css">
-
+        <!--- Use Google Fonts -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+        
         <title>
             Domain API Tool
         </title>
@@ -23,14 +26,27 @@
         <div id="outer-container" >
 
             <div id="top-area" class="flex-center dir-column">
-                <h1>Domain API Tool</h1>
-                <h6>Search for properties using property data from Domain Group</h6>
-                <div id="get-property-from-id-div">
-                    <input type="text">
-                    <button value='Get Property From ID' id="get-property-from-id-btn" >Get Property From ID</button>
+
+                <div id="title-bar">
+                    <div id="title-and-subtitle">
+                        <h1>Domain API Tool</h1>
+                        <h6>Search for properties using property data from Domain Group</h6>
+                    </div>
+                    <div id="get-property-from-id-div">
+                        <input type="text">
+                        <button value='Get Property From ID' id="get-property-from-id-btn" class="search-buttons">Search by ID</button>
+                    </div>
                 </div>
-                
+
                 <form id="search-parameter-form">
+                    
+                    <div class="select-div">
+                        <label for="listing-type" id="listing-type-select-label" class="select-label">Listing Type</label>
+                        <select id="listing-type-select" name="listing-type" class="select-box">
+                            <option value="Sale" selected>Sale</option>
+                        </select>
+                    </div>
+
                     <div class="select-div">
                         <label for="bedrooms-min" id="bedrooms-min-select-label" class="select-label">Bedrooms (Min.)</label>
                         <select id="bedrooms-min-select" name="bedrooms-min" class="select-box">
@@ -130,22 +146,6 @@
                     </div>
 
                     <div class="select-div">
-                        <label for="number-of-properties" id="number-of-properties-select-label" class="select-label">Number of properties to display</label>
-                        <select id="number-of-properties-select" name="number-of-properties" class="select-box">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3" selected>3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                        </select>
-                    </div>
-
-                    <div class="select-div">
                         <label for="location-state" id="location-state-select-label" class="select-label">State</label>
                         <select id="location-state-select" name="location-state" class="select-box">
                             <option value="ACT">ACT</option>
@@ -217,12 +217,6 @@
                         </select>
                     </div>
 
-                    <div class="select-div">
-                        <label for="listing-type" id="listing-type-select-label" class="select-label">Listing Type</label>
-                        <select id="listing-type-select" name="listing-type" class="select-box">
-                            <option value="Sale" selected>Sale</option>
-                        </select>
-                    </div>
 
                     <div class="select-div">
                         <label for="price-withheld" id="price-withheld-select-label" class="select-label">Exclude Price Withheld</label>
@@ -242,9 +236,25 @@
                         </select>
                     </div>
 
+                    <div class="select-div">
+                        <label for="number-of-properties" id="number-of-properties-select-label" class="select-label">Number to display</label>
+                        <select id="number-of-properties-select" name="number-of-properties" class="select-box">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3" selected>3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+
                 </form>
 
-                <button value="Search For Properties" id="search-btn">Search For Properties</button>
+                <button value="Search For Properties" id="search-btn" class="search-buttons">Search</button>
 
             </div>
 

@@ -3,6 +3,16 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Set color variables */
+:root {
+    --domain-green: rgb(35, 190, 55);
+    --domain-blue: rgb(15, 50, 100);
+    --domain-grey: rgba(10,10,10, 0.05);
+    --box-shadow-property-tile: rgba(0,0,0,0.3);
+    --box-shadow-select-div: white;
 }
 
 /* General format rules */
@@ -19,6 +29,7 @@
 
 
 /* Main */
+
 
 #loading-overlay {
     position: absolute;
@@ -39,52 +50,59 @@
 #outer-container {
     height: 97vh;
     width: 100%;
-    border: 1px solid black;
+}
+
+#title-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
 }
 
 #top-area {
     height: 25vh;
-    border: 1px solid black;
     width: 100%;
     justify-content: space-around;
-    background-color: rgb(15, 50, 100);
+    background-color: var(--domain-blue);
     color: white;
 }
 
 #search-parameter-form {
     display: grid;
-    grid-template-columns: repeat(8,1fr);
+    grid-template-columns: repeat(7,1fr);
     grid-template-rows: repeat(2, 1fr);
     height: 10vh;
-    width: 100%;
-    margin: 10px 0px 0px 0px;
+    margin: 10px 10px 0px 10px;
+    grid-gap: 2px;
 }
 
 .select-div {
-    border: 1px solid black;
-    padding: 10px;
     height: 5vh;
+    padding: 5px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
-    background-color: rgb(35, 190, 55);
+    background-color: var(--domain-green);
     color: white;
     font-weight: bold;
 }
 
+.select-div:hover {
+    box-shadow: 0px 0px 2px 2px var(--box-shadow-select-div);
+}
+
 
 .select-label, .select-box {
-    font-size: 0.7rem;
+    font-size: 0.6rem;
 }
 
 .select-box {
     text-align-last: center; /* centers selected result in box */
-    width: 50px;
+    width: 70px;
     padding: 2px;
 }
 
 #bottom-area {
-    border: 1px dashed black;
     height: 72vh;
     width: 100%;
     overflow-y: hidden;
@@ -94,7 +112,7 @@
     align-items: center;
     flex-wrap: wrap;
     flex-direction: column;
-    background-color: rgba(10,10,10, 0.05);
+    background-color: var(--domain-grey);
 }
 
 /* Create pseudo-element as last element in bottom area 
@@ -108,7 +126,7 @@ flexbox to stop overflow ignoring right margin */
 .property-tile {
     margin: 20px;
     border: 3px solid black;
-    box-shadow: 0px 5px 10px 2px rgba(0,0,0,0.3);
+    box-shadow: 0px 5px 10px 2px var(--box-shadow-property-tile);
     animation: fade-in;
     animation-duration: 1s;
     width: 350px;
@@ -126,15 +144,13 @@ flexbox to stop overflow ignoring right margin */
     height: 300px;
     width: 300px;
     overflow: hidden;
-}
-
-.image {
-    margin: 10px;
+    margin-top: 10px;
 }
 
 .image:hover {
     animation: slow-scale;
     animation-duration: 1s;
+    animation-fill-mode: forwards;
 }
 
 .bedbathcar-div {
@@ -158,6 +174,17 @@ flexbox to stop overflow ignoring right margin */
     border: 1px dotted black;
     padding: 5px;
     font-size: 0.8rem;
+}
+
+.search-buttons {
+    background-color: var(--domain-green);
+    color: white;
+    padding: 5px;
+    width: 100px;
+}
+
+.search-buttons:hover {
+    box-shadow: 0px 0px 2px 2px var(--box-shadow-select-div);
 }
 
 
